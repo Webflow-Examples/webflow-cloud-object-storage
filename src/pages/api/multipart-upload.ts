@@ -28,7 +28,7 @@ async function parseRequestData(
 // Creates and completes a new multipart upload session
 export const POST: APIRoute = async ({ request, locals }) => {
   // Set the origin for the API
-  API.init(locals.runtime.env.ORIGIN);
+  API.init((locals.runtime as any).env.ORIGIN);
 
   // Handle CORS preflight requests
   if (request.method === "OPTIONS") {
@@ -141,7 +141,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 // Uploads individual parts of a multipart upload
 export const PUT: APIRoute = async ({ request, locals }) => {
   // Set the origin for the API
-  API.init(locals.runtime.env.ORIGIN);
+  API.init((locals.runtime as any).env.ORIGIN);
 
   // Handle CORS preflight requests
   if (request.method === "OPTIONS") {
@@ -211,7 +211,7 @@ export const PUT: APIRoute = async ({ request, locals }) => {
 // Aborts a multipart upload
 export const DELETE: APIRoute = async ({ request, locals }) => {
   // Set the origin for the API
-  API.init(locals.runtime.env.ORIGIN);
+  API.init((locals.runtime as any).env.ORIGIN);
 
   // Handle CORS preflight requests
   if (request.method === "OPTIONS") {
@@ -267,6 +267,6 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
 
 export const OPTIONS: APIRoute = async ({ request, locals }) => {
   // Set the origin for the API
-  API.init(locals.runtime.env.ORIGIN);
+  API.init((locals.runtime as any).env.ORIGIN);
   return API.cors(request);
 };

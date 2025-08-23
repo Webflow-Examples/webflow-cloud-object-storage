@@ -3,7 +3,7 @@ import { API } from "../../utils/api";
 
 export const POST: APIRoute = async ({ request, locals }) => {
   // Set the origin for the API
-  API.init(locals.runtime.env.ORIGIN);
+  API.init((locals.runtime as any).env.ORIGIN);
 
   // Handle CORS preflight requests
   if (request.method === "OPTIONS") {
@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Generate unique filename with timestamp
     const timestamp = Date.now();
     const extension = file.name.split(".").pop() || "";
-    const filename = `${timestamp}-${file.name}`;
+    const filename = `${timestamp}-${file.name}.${extension}`;
 
     // Upload to R2 bucket
     const object = await bucket.put(filename, file, {
