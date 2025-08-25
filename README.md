@@ -45,11 +45,15 @@ Get started with the demo by cloning the repository and setting up your developm
 
 ### Installation
 
-1. **Clone the repository**
+1. **Fork and clone the repository**
+
+   First, [fork the repository](https://github.com/Webflow-Examples/auth-cloud-webapp/fork) so you have your own copy of this project. 
+   
+   Once you have a fork of the Github project, clone it down to your machine so you have a local copy of the code to work with.
 
    ```bash
-   git clone https://github.com/webflow-cloud/file-uploader.git
-   cd file-uploader
+   git clone https://github.com/<YOUR-GITHUB-USERNAME>/webflow-cloud-object-storage.git
+   cd webflow-cloud-object-storage
    ```
 
 2. **Install dependencies**
@@ -88,18 +92,31 @@ Get started with the demo by cloning the repository and setting up your developm
    ```
 
 3. **Upate Astro Config**
+   
    In `astro.config.mjs` to include the base path for your environment and the `assetsPrefix` to match the mount path of your environment.
 
    ```ts title="astro.config.mjs"
    export default defineConfig({
-     base: "/YOUR_MOUNT_PATH",
+     base: "/YOUR_MOUNT_PATH", // i.e. "/app"
      build: {
-       assetsPrefix: "/YOUR_MOUNT_PATH",
+       assetsPrefix: "/YOUR_MOUNT_PATH", // i.e. "/app"
      },
 
      // Additional configuration options...
    });
    ```
+
+4. **Test the app locally**
+
+   Run the app locally to try out the project before deploying.
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Push changes to repo**
+
+   Once you've made local code changes, commit the files and push the commit to your remote Github repo fork. If you do not have any Git file changes detected, you can skip this step.
 
 ### Create a Webflow Cloud Project
 
@@ -108,18 +125,19 @@ Get started with the demo by cloning the repository and setting up your developm
    In Webflow, go to the Webflow Cloud tab of your site settings.
 
    1. Go to your Webflow Cloud dashboard
+   2. Click "Install Github app" to authorize Webflow Cloud for your fork of this repo - follow the prompts on Github
    2. Click "Create new project"
    3. Name your project
-   4. Choose the `object-storage-example` repository
+   4. Choose the `webflow-cloud-object-storage` repository
    5. Click "Create project"
 
    The application will be available at `http://localhost:4321`
 
 2. **Create an Environment**
 
-   Create a new environment for the `full-app` branch.
+   Create a new environment for the `main` branch.
 
-   1. In the same modal, choose the `full-app` branch
+   1. In the same modal, choose the `main` branch
    2. Choose a mount path for the environment (for example, /app → mysite.webflow.io/app)
    3. Click "Create environment"
    4. Publish your Webflow site to make your environment live.
@@ -131,20 +149,22 @@ Get started with the demo by cloning the repository and setting up your developm
    ORIGIN=YOUR_WEBFLOW_CLOUD_DOMAIN
    ```
 
+   For example, this might value would look like `https://<your-webflow-site-slug>.webflow.io`
+
+
 ## Deploy the App
 
-1. **Commit and push your changes**
-   To deploy your app to Webflow Cloud, commit and push your changes.
+Once the environment is created, you should see a button to "Deploy latest Github commit". Click this to deploy the last commit on the `main` branch of your forked project; this process may take a few minutes to complete.
 
-## View your app in Webflow Clou
+## View your app in Webflow Cloud
 
-Go to you domain and base path in Webflow Cloud to start uploading file.
+Go to you domain and base path in Webflow Cloud to start uploading files (i.e. `https://<your-webflow-site-slug>.webflow.io/app`).
 
 ### Troubleshoot Astro R2 File Upload Demo
 
 | Issue                                 | Solution                                                                                                                        |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **CORS errors during upload**         | Ensure your using the `ASSET_PREFIX` environment variables for all endpoints. Add your Webflow Cloud domain to allowed origins. |
+| **CORS errors during upload**         | Ensure you're calling into the backend endpoint with the `ASSET_PREFIX` environment variable as the hostname. Add your Webflow Cloud domain to allowed origins. |
 | **Upload fails with large files**     | Check your Webflow Cloud limits. Multipart uploads handle files up to 5GB.                                                      |
 | **Environment variables not loading** | Verify your `.env` file is in the project root and variables are correctly named.                                               |
 
@@ -169,7 +189,7 @@ The application provides the following API endpoints for file operations:
 ### File Management Endpoints
 
 - `GET /api/assets` - List all uploaded files
-- `GET /api/asset?key=<filename>` - Get specific file metadata
+- `GET /api/get-asset?key=<filename>` - Get specific file metadata
 
 ## Contributing guidelines
 
@@ -185,8 +205,5 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 
 ## Terms of use
 
-Astro - Webflow Cloud File Upload Demo is licensed under the [MIT License](LICENSE).
+This Webflow Cloud Object Storage example project is licensed under the [MIT License](LICENSE).
 
----
-
-> Explore other templates from [The Good Docs Project](https://thegooddocsproject.dev/). Use our [feedback form](https://thegooddocsproject.dev/feedback/?template=Readme%20template) to give feedback on this template.
