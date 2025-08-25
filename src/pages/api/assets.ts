@@ -1,7 +1,16 @@
 import type { APIRoute } from "astro";
+import { API } from "../../utils/api";
 
-export const GET: APIRoute = async ({ locals }) => {
+export const GET: APIRoute = async ({ locals, request }) => {
   try {
+    // Set the origin for the API
+    API.init((locals.runtime as any).env.ORIGIN);
+
+    // Handle CORS preflight requests
+    if (request.method === "OPTIONS") {
+      console.log("CORS preflight request from:", request.headers.get("Origin"));
+      return API.cors(request);
+    }
     // Check if bucket is available
     const bucket = locals.runtime.env.CLOUD_FILES;
     if (!bucket) {
@@ -27,8 +36,6 @@ export const GET: APIRoute = async ({ locals }) => {
       // @ts-ignore
       cursor = next.cursor;
     }
-
-    console.log(listed.objects);
 
     // Return the files as a JSON object
     return new Response(JSON.stringify(listed.objects), {
