@@ -70,7 +70,6 @@ export default function FileUploader() {
   const loadFiles = async () => {
     try {
       setLoading(true);
-      console.log("ASSETS_PREFIX", import.meta.env.BASE_URL);
       const response = await fetch(`${import.meta.env.BASE_URL}/api/assets`);
 
       if (!response.ok) {
@@ -157,7 +156,6 @@ export default function FileUploader() {
     try {
       const assetsPrefix = import.meta.env.ASSETS_PREFIX || "";
       const BASE_CF_URL = `${assetsPrefix}/api/multipart-upload`;
-      console.log("BASE_CF_URL:", BASE_CF_URL);
       const key = file.name;
       const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
       const totalParts = Math.ceil(file.size / CHUNK_SIZE);

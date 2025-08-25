@@ -37,8 +37,6 @@ export const GET: APIRoute = async ({ locals, request }) => {
       cursor = next.cursor;
     }
 
-    console.log(listed.objects);
-
     // Return the files as a JSON object
     return new Response(JSON.stringify(listed.objects), {
       headers: { "Content-Type": "application/json" },
