@@ -161,7 +161,7 @@ const assetsPrefix = Astro.locals.runtime?.env?.ASSETS_PREFIX || '/app';
 			loadingFiles.classList.remove('hidden');
 			filesList.innerHTML = '';
 			
-			const response = await fetch(`${assetsPrefix}/api/assets`);
+			const response = await fetch(`${assetsPrefix}/api/list-assets`);
 			if (!response.ok) {
 				throw new Error('Failed to load files');
 			}

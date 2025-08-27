@@ -47,7 +47,7 @@ Get started with the demo by cloning the repository and setting up your developm
 
 1. **Fork and clone the repository**
 
-   First, [fork the repository](https://github.com/Webflow-Examples/auth-cloud-webapp/fork) so you have your own copy of this project. 
+   First, [fork the repository](https://github.com/Webflow-Examples/webflow-cloud-object-storage/fork) so you have your own copy of this project. 
    
    Once you have a fork of the Github project, clone it down to your machine so you have a local copy of the code to work with.
 
@@ -114,7 +114,7 @@ Get started with the demo by cloning the repository and setting up your developm
    npm run dev
    ```
 
-4. **Push changes to repo**
+5. **Push changes to repo**
 
    Once you've made local code changes, commit the files and push the commit to your remote Github repo fork. If you do not have any Git file changes detected, you can skip this step.
 
@@ -126,10 +126,10 @@ Get started with the demo by cloning the repository and setting up your developm
 
    1. Go to your Webflow Cloud dashboard
    2. Click "Install Github app" to authorize Webflow Cloud for your fork of this repo - follow the prompts on Github
-   2. Click "Create new project"
-   3. Name your project
-   4. Choose the `webflow-cloud-object-storage` repository
-   5. Click "Create project"
+   3. Click "Create new project"
+   4. Name your project
+   5. Choose the `webflow-cloud-object-storage` repository
+   6. Click "Create project"
 
    The application will be available at `http://localhost:4321`
 
@@ -188,8 +188,8 @@ The application provides the following API endpoints for file operations:
 
 ### File Management Endpoints
 
-- `GET /api/assets` - List all uploaded files
-- `GET /api/get-asset?key=<filename>` - Get specific file metadata
+- `GET /api/list-assets` - List all uploaded files
+- `GET /api/asset?key=<filename>` - Get specific file metadata
 
 ## Contributing guidelines
 

@@ -70,7 +70,7 @@ export default function FileUploader() {
   const loadFiles = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${import.meta.env.BASE_URL}/api/assets`);
+      const response = await fetch(`${import.meta.env.BASE_URL}/api/list-assets`);
 
       if (!response.ok) {
         throw new Error("Failed to load files");
@@ -527,7 +527,7 @@ export default function FileUploader() {
               const fileLink =
                 file.link ||
                 (file.key
-                  ? `${import.meta.env.ASSETS_PREFIX}/api/get-asset?key=${file.key}`
+                  ? `${import.meta.env.ASSETS_PREFIX}/api/asset?key=${file.key}`
                   : "");
               const uploadDate =
                 file.dateUploaded || file.uploaded || new Date().toISOString();
