@@ -1,21 +1,19 @@
-# Astro R2 File Upload Demo
+# Webflow Cloud: Object Storage - File Upload Example
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Astro](https://img.shields.io/badge/Astro-5.7.0-purple.svg)](https://astro.build/)
 [![Cloudflare R2](https://img.shields.io/badge/Cloudflare%20R2-Storage-orange.svg)](https://developers.cloudflare.com/r2/)
 
-An example file upload solution built with Astro and Webflow Cloud Object Storage. This project demonstrates how to build scalable file upload functionality with support for both simple uploads and multipart uploads for large files.
+An example file upload solution built with Astro and [Webflow Cloud Object Storage.](https://developers.webflow.com/webflow-cloud/storing-data/object-storage) This project demonstrates how to build scalable file upload functionality with support for both simple uploads and multipart uploads for large files.
 
 ## Table of contents
 
 1. [Project description](#project-description)
-2. [Who this project is for](#who-this-project-is-for)
-3. [Project dependencies](#project-dependencies)
-4. [Instructions for using Astro R2 File Upload Demo](#instructions-for-using-astro-r2-file-upload-demo)
+2. [Project dependencies](#project-dependencies)
+3. [Getting started](#getting-started)
+4. [Troubleshooting](#troubleshooting)
 5. [API Endpoints](#api-endpoints)
-6. [Contributing guidelines](#contributing-guidelines)
-7. [How to get help](#how-to-get-help)
-8. [Terms of use](#terms-of-use)
+6. [Terms of use](#terms-of-use)
 
 ### Key Features
 
@@ -24,10 +22,6 @@ An example file upload solution built with Astro and Webflow Cloud Object Storag
 - **🖼️ File Gallery**: View and download uploaded files
 - **🔒 CORS Support**: Proper CORS handling for cross-origin requests
 - **⚡ Edge Performance**: Leverages Cloudflare's global edge network for fast uploads
-
-## Who this project is for
-
-This project is intended for developers who want to implement file upload functionality in their Webflow Cloud applications. Whether you're building a content management system, a file sharing platform, or need to handle user-generated content, this project provides the foundation you need.
 
 ## Project dependencies
 
@@ -43,12 +37,12 @@ Before using Astro - Webflow Cloud File Upload Demo, ensure you have:
 
 Get started with the demo by cloning the repository and setting up your development environment.
 
-### Installation
+### 1. Installation
 
 1. **Fork and clone the repository**
 
-   First, [fork the repository](https://github.com/Webflow-Examples/webflow-cloud-object-storage/fork) so you have your own copy of this project. 
-   
+   First, [fork the repository](https://github.com/Webflow-Examples/webflow-cloud-object-storage/fork) so you have your own copy of this project.
+
    Once you have a fork of the Github project, clone it down to your machine so you have a local copy of the code to work with.
 
    ```bash
@@ -64,7 +58,7 @@ Get started with the demo by cloning the repository and setting up your developm
 
    This installs all required packages including Astro, React, TypeScript, and Cloudflare Workers dependencies.
 
-### Configure
+### 2. Configuration
 
 1. **Set up environment variables**
 
@@ -92,7 +86,7 @@ Get started with the demo by cloning the repository and setting up your developm
    ```
 
 3. **Upate Astro Config**
-   
+
    In `astro.config.mjs` to include the base path for your environment and the `assetsPrefix` to match the mount path of your environment.
 
    ```ts title="astro.config.mjs"
@@ -118,7 +112,7 @@ Get started with the demo by cloning the repository and setting up your developm
 
    Once you've made local code changes, commit the files and push the commit to your remote Github repo fork. If you do not have any Git file changes detected, you can skip this step.
 
-### Create a Webflow Cloud Project
+### 3. Create a Webflow Cloud project
 
 1. **Create Project**
 
@@ -151,22 +145,21 @@ Get started with the demo by cloning the repository and setting up your developm
 
    For example, this might value would look like `https://<your-webflow-site-slug>.webflow.io`
 
+### 4. Deploy the App
 
-## Deploy the App
+Once the environment is created, you should see a button to "Deploy latest GitHub commit". Click this to deploy the last commit on the `main` branch of your forked project; this process may take a few minutes to complete.
 
-Once the environment is created, you should see a button to "Deploy latest Github commit". Click this to deploy the last commit on the `main` branch of your forked project; this process may take a few minutes to complete.
-
-## View your app in Webflow Cloud
+### 5. View your app in Webflow Cloud
 
 Go to you domain and base path in Webflow Cloud to start uploading files (i.e. `https://<your-webflow-site-slug>.webflow.io/app`).
 
-### Troubleshoot Astro R2 File Upload Demo
+## Troubleshooting
 
-| Issue                                 | Solution                                                                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Issue                                 | Solution                                                                                                                                                        |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **CORS errors during upload**         | Ensure you're calling into the backend endpoint with the `ASSET_PREFIX` environment variable as the hostname. Add your Webflow Cloud domain to allowed origins. |
-| **Upload fails with large files**     | Check your Webflow Cloud limits. Multipart uploads handle files up to 5GB.                                                      |
-| **Environment variables not loading** | Verify your `.env` file is in the project root and variables are correctly named.                                               |
+| **Upload fails with large files**     | Check your Webflow Cloud limits. Multipart uploads handle files up to 5GB.                                                                                      |
+| **Environment variables not loading** | Verify your `.env` file is in the project root and variables are correctly named.                                                                               |
 
 Other troubleshooting resources:
 
@@ -191,19 +184,6 @@ The application provides the following API endpoints for file operations:
 - `GET /api/list-assets` - List all uploaded files
 - `GET /api/asset?key=<filename>` - Get specific file metadata
 
-## Contributing guidelines
-
-We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-### How to contribute
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## Terms of use
 
 This Webflow Cloud Object Storage example project is licensed under the [MIT License](LICENSE).
-
