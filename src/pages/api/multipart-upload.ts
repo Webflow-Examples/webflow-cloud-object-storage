@@ -12,7 +12,6 @@ interface CompleteMultipartRequest {
   parts: R2UploadedPart[];
 }
 
-// Helper function to parse JSON
 async function parseRequestData(
   request: Request
 ): Promise<{ [key: string]: any }> {
@@ -25,19 +24,8 @@ async function parseRequestData(
   throw new Error("Content-Type must be application/json");
 }
 
-// Creates and completes a new multipart upload session
 export const POST: APIRoute = async ({ request, locals }) => {
-  // Set the origin for the API
-  API.init((locals.runtime as any).env.ORIGIN);
-
-  // Handle CORS preflight requests
-  if (request.method === "OPTIONS") {
-    console.log("CORS preflight request from:", request.headers.get("Origin"));
-    return API.cors(request);
-  }
-
   try {
-    // Check if bucket is available
     const bucket = locals.runtime.env.CLOUD_FILES;
     if (!bucket) {
       return API.error("Cloud storage not configured", request, 500);
@@ -52,7 +40,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     switch (action) {
       case "create": {
-        // Create a new multipart upload
         const parsedData = await parseRequestData(request);
         const body: MultipartUploadRequest = {
           key: parsedData.key as string,
@@ -87,7 +74,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       }
 
       case "complete": {
-        // Complete a multipart upload
         const parsedData = await parseRequestData(request);
         const body: CompleteMultipartRequest = {
           uploadId: parsedData.uploadId as string,
@@ -105,7 +91,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
             body.uploadId
           );
 
-          // Parts are already in R2UploadedPart format
           const r2Parts = body.parts;
 
           const object = await multipartUpload.complete(r2Parts);
@@ -138,19 +123,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 };
 
-// Uploads individual parts of a multipart upload
 export const PUT: APIRoute = async ({ request, locals }) => {
-  // Set the origin for the API
-  API.init((locals.runtime as any).env.ORIGIN);
-
-  // Handle CORS preflight requests
-  if (request.method === "OPTIONS") {
-    console.log("CORS preflight request from:", request.headers.get("Origin"));
-    return API.cors(request);
-  }
-
   try {
-    // Check if bucket is available
     const bucket = locals.runtime.env.CLOUD_FILES;
     if (!bucket) {
       return API.error("Cloud storage not configured", request, 500);
@@ -183,7 +157,6 @@ export const PUT: APIRoute = async ({ request, locals }) => {
     try {
       const multipartUpload = bucket.resumeMultipartUpload(key, uploadId);
 
-      // Convert request body to ArrayBuffer to get known length
       const arrayBuffer = await request.arrayBuffer();
       const uploadedPart = await multipartUpload.uploadPart(
         partNumber,
@@ -208,19 +181,8 @@ export const PUT: APIRoute = async ({ request, locals }) => {
   }
 };
 
-// Aborts a multipart upload
 export const DELETE: APIRoute = async ({ request, locals }) => {
-  // Set the origin for the API
-  API.init((locals.runtime as any).env.ORIGIN);
-
-  // Handle CORS preflight requests
-  if (request.method === "OPTIONS") {
-    console.log("CORS preflight request from:", request.headers.get("Origin"));
-    return API.cors(request);
-  }
-
   try {
-    // Check if bucket is available
     const bucket = locals.runtime.env.CLOUD_FILES;
     if (!bucket) {
       return API.error("Cloud storage not configured", request, 500);
@@ -263,10 +225,4 @@ export const DELETE: APIRoute = async ({ request, locals }) => {
     console.error("Abort multipart upload error:", error);
     return API.error("Abort multipart upload failed", request, 500);
   }
-};
-
-export const OPTIONS: APIRoute = async ({ request, locals }) => {
-  // Set the origin for the API
-  API.init((locals.runtime as any).env.ORIGIN);
-  return API.cors(request);
 };

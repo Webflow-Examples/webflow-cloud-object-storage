@@ -11,16 +11,8 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.5.0",
-    "@astrojs/react": "^4.2.5",
-    "@tailwindcss/vite": "^4.1.12",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "astro": "^5.7.0",
-    "daisyui": "^5.0.50",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.12"
+    "@astrojs/cloudflare": "^13.5.1",
+    "astro": "^6.3.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250415.0",

@@ -6,6 +6,7 @@ declare namespace Cloudflare {
 		WEBFLOW_SITE_ID: string;
 		WEBFLOW_SITE_API_TOKEN: string;
 		ORIGIN: string;
+		API_BEARER_TOKEN: string;
 		CLOUD_FILES: R2Bucket;
 		ASSETS: Fetcher;
 	}
@@ -15,7 +16,7 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "WEBFLOW_SITE_ID" | "WEBFLOW_SITE_API_TOKEN" | "ORIGIN">> {}
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "WEBFLOW_SITE_ID" | "WEBFLOW_SITE_API_TOKEN" | "ORIGIN" | "API_BEARER_TOKEN">> {}
 }
 
 // Begin runtime types
